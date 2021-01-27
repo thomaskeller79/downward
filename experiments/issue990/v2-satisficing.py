@@ -12,9 +12,9 @@ REVISIONS = [
 ]
 
 CONFIGS = [
-    common_setup.IssueConfig("lama-first", ["--evaluator", "hlm=lmcount(lm_factory=lm_acyclic(lm_rhw(reasonable_orders=true)),transform=adapt_costs(one),pref=false)", "--evaluator", "hff=ff(transform=adapt_costs(one))", "--search", """lazy_greedy([hff,hlm],preferred=[hff,hlm], cost_type=one,reopen_closed=false)"""]),
+    common_setup.IssueConfig("lama-first-pref", ["--evaluator", "hlm=lmcount(lm_factory=lm_acyclic(lm_rhw(reasonable_orders=true)),transform=adapt_costs(one),pref=true)", "--evaluator", "hff=ff(transform=adapt_costs(one))", "--search", """lazy_greedy([hff,hlm],preferred=[hff,hlm], cost_type=one,reopen_closed=false)"""]),
     common_setup.IssueConfig("lm-zg", ["--search", "eager_greedy([lmcount(lm_acyclic(lm_zg(reasonable_orders=false)))])"]),
-    common_setup.IssueConfig("lama-first-cyclic", ["--evaluator", "hlm=lmcount(lm_factory=lm_rhw(reasonable_orders=true),transform=adapt_costs(one),pref=false)", "--evaluator", "hff=ff(transform=adapt_costs(one))", "--search", """lazy_greedy([hff,hlm],preferred=[hff,hlm], cost_type=one,reopen_closed=false)"""]),
+    common_setup.IssueConfig("lama-first-pref-cyclic", ["--evaluator", "hlm=lmcount(lm_factory=lm_rhw(reasonable_orders=true),transform=adapt_costs(one),pref=true)", "--evaluator", "hff=ff(transform=adapt_costs(one))", "--search", """lazy_greedy([hff,hlm],preferred=[hff,hlm], cost_type=one,reopen_closed=false)"""]),
     common_setup.IssueConfig("lm-zg-cyclic", ["--search", "eager_greedy([lmcount(lm_zg(reasonable_orders=false))])"]),
 ]
 
@@ -49,6 +49,7 @@ exp.add_step("build", exp.build)
 exp.add_step("start", exp.start_runs)
 exp.add_fetcher(name="fetch")
 exp.add_absolute_report_step()
+exp.add_comparison_table_step()
 exp.add_parse_again_step()
 
 exp.run_steps()
