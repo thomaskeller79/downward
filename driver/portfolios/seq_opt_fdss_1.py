@@ -12,7 +12,7 @@ CONFIGS = [
            "label_reduction=exact(before_shrinking=true,before_merging=false),"
            "max_states=200000))"]),
     (455, ["--evaluator",
-           "lmc=lmcount(lm_merged([lm_rhw(),lm_hm(m=1)]),admissible=true)",
+           "lmc=lmcount(lm_acyclic(lm_merged([lm_rhw(),lm_hm(m=1)])),admissible=true)",
            "--search",
            "astar(lmc,lazy_evaluator=lmc)"]),
     (569, ["--search",
